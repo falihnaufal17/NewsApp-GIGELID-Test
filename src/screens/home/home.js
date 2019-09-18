@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, StatusBar } from 'react-native'
 import NewsList from '../../components/newsList';
 
 export class Home extends Component {
     render() {
         return (
             <View>
+                <StatusBar backgroundColor='#03a4df' />
                 <View style={styles.AppBar}>
                     <View style={styles.header}>
                         <Image source={{ uri: `https://gigel.id/images/logo-gigel-beta.png` }} alt='gigel logo' style={styles.logo} />

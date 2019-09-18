@@ -46,7 +46,9 @@ export class NewsList extends Component {
                         </View>
                     </View>
                     <Text style={styles.description}>{item.description}</Text>
-                    <Button title="Read" onPress={() => this.props.navigation.navigate('Detail')} />
+                    <Button title="Read" onPress={() => this.props.navigation.navigate('Detail', {
+                        newsUrl: item.url
+                    })} />
                 </View>
             </View>
         )
