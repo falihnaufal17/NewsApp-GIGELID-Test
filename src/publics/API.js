@@ -1,0 +1,1 @@
+export default url = `https://api.gigel.co.id/api/v1/test/react-native`
