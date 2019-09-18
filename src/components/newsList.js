@@ -13,7 +13,8 @@ export class NewsList extends Component {
 
         this.state = {
             news: [],
-            isLoading: true
+            isLoading: true,
+            perPage: 8
         }
     }
 
@@ -25,10 +26,18 @@ export class NewsList extends Component {
         await this.props.dispatch(getNews())
             .then(() => {
                 this.setState({
-                    news: this.props.newsState,
+                    news: this.props.newsState.slice(0, this.state.perPage),
                     isLoading: false
                 })
             })
+    }
+
+    handleLoadMore = async () => {
+        await this.setState({
+            perPage: this.state.perPage + 8
+        }, () => {
+            this.makeRequest()
+        })
     }
 
     _renderItem = ({ item }) => {
@@ -54,20 +63,36 @@ export class NewsList extends Component {
         )
     }
 
+    _renderFooter = () => {
+        return (
+            <View style={styles.footerFL}>
+                <>
+                    <ActivityIndicator animating size="large" />
+                    <Text style={{ fontSize: 12 }}>Getting data..</Text>
+                </>
+            </View>
+        )
+    }
+
     render() {
-        console.warn('data news: ', this.state.news)
+        let { news, isLoading } = this.state
+        console.warn('count news: ', this.state.news.length)
         return (
             <>
                 {
-                    this.state.isLoading ?
+                    isLoading ?
                         <ActivityIndicator size='large' color='#03a4df' />
                         :
                         <FlatList
-                            data={this.state.news}
+                            data={news}
                             scrollEnabled={true}
                             showsVerticalScrollIndicator={false}
                             renderItem={this._renderItem}
                             keyExtractor={item => item.url}
+                            style={{ marginBottom: 100 }}
+                            ListFooterComponent={this._renderFooter}
+                            onEndReached={this.handleLoadMore}
+                            onEndReachedThreshold={0.1}
                         />
                 }
             </>
@@ -84,6 +109,12 @@ const mapStateToProps = state => {
 export default withNavigation(connect(mapStateToProps)(NewsList))
 
 const styles = StyleSheet.create({
+    footerFL: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff'
+    },
     txtRight: {
         textAlign: 'right',
         alignContent: 'flex-end',
