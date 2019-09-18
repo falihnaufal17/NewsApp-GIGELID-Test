@@ -54,7 +54,7 @@
     <tr>
       <td align="center">
         <a href="https://github.com/falihnaufal17">
-          <img width="100" src="./src/assets/IMG_20190526_225658_674.jpg" alt="Falih Naufal"><br/>
+          <img width="100" src="https://avatars0.githubusercontent.com/u/35053882?s=400&u=bcaa1ec9f86edef98c566d22ee66b660fd6d6323&v=4" alt="Falih Naufal"><br/>
           <sub><b>Falih Naufal</b></sub>
         </a>
       </td>
